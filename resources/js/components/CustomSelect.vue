@@ -1,32 +1,28 @@
 <template>
-    <div>
-        <select>
-            <slot></slot>
+        <select id="custom_select" class="select2" :class="extra_classes">
+            <option value="0" disabled selected>{{default_option}}</option>
+            <option v-for="item in options" :value="item.id" :key="item.id">{{item.text}}</option>
         </select>
-  </div>
 </template>
 
 <script>
     export default {
-        props: ['options', 'value'],
+        props: ['options', 'value', 'extra_classes','default_option'],
         mounted: function () {
             var vm = this
             $(this.$el)
-            // init select2
-            .select2({ data: this.options })
-            .val(this.value)
-            .trigger('change')
-            // emit event on change.
+            .select2()
+            .val(0)
             .on('change', function () {
                 vm.$emit('input', this.value)
             })
         },
         watch: {
             value: function (value) {
-            // update value
-            $(this.$el)
-                .val(value)
-                .trigger('change')
+                // update value
+                $(this.$el)
+                    .val(value)
+                    .trigger('change')
             },
             options: function (options) {
                 // update options
