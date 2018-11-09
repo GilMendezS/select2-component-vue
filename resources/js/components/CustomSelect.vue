@@ -1,6 +1,6 @@
 <template>
         <select id="custom_select" class="select2" :class="extra_classes">
-            <option value="0" disabled selected>{{default_option}}</option>
+            <option value="0" disabled selected="selected">{{default_option}}</option>
             <option v-for="item in options" :value="item.id" :key="item.id">{{item.text}}</option>
         </select>
 </template>
@@ -11,11 +11,10 @@
         mounted: function () {
             var vm = this
             $(this.$el)
-            .select2()
-            .val(0)
             .on('change', function () {
                 vm.$emit('input', this.value)
             })
+
         },
         watch: {
             value: function (value) {
