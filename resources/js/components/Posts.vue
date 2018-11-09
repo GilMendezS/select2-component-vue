@@ -1,7 +1,9 @@
 <template>
     <div>
         <p>Selected: {{selected}}</p>
-        <select2 :default_option="title" @input="changeValue" :options="posts">
+        <select2 :default_option="title" 
+            extra_classes="form-control"
+            @input="changeValue" :options="posts">
             <option disabled value="0">Select one post</option>
         </select2>
         <button @click="reloadData" :disabled="!selected">send</button>
@@ -17,7 +19,7 @@ export default {
     data(){
         return {
             posts:[],
-            selected: '0',
+            selected: '',
             title: 'Select an option'
         }
     },
@@ -40,9 +42,11 @@ export default {
         reloadData(){
             axios.get('https://jsonplaceholder.typicode.com/users')
         .then(response => {
+            this.selected = ''
             this.posts = response.data.map(item => {
                 return {id: item.id , text: `${item.id} - ${item.name}`}
             })
+            
         })
         .catch(err => {
 

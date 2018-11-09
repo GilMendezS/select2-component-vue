@@ -53222,23 +53222,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['options', 'value', 'extra_classes', 'default_option'],
+    props: ['options', 'extra_classes', 'default_option'],
     mounted: function mounted() {
         var vm = this;
         $(this.$el).on('change', function () {
             vm.$emit('input', this.value);
         });
     },
-    watch: {
-        value: function value(_value) {
-            // update value
-            $(this.$el).val(_value).trigger('change');
-        },
-        options: function options(_options) {
-            // update options
-            $(this.$el).empty().select2({ data: _options });
-        }
-    },
+    watch: {},
     destroyed: function destroyed() {
         $(this.$el).off().select2('destroy');
     }
@@ -53257,14 +53248,12 @@ var render = function() {
     {
       staticClass: "select2",
       class: _vm.extra_classes,
-      attrs: { id: "custom_select" }
+      attrs: { id: "custom_select", "data-placeholder": "Select an option" }
     },
     [
-      _c(
-        "option",
-        { attrs: { value: "0", disabled: "", selected: "selected" } },
-        [_vm._v(_vm._s(_vm.default_option))]
-      ),
+      _c("option", { attrs: { value: "0", selected: "selected" } }, [
+        _vm._v(_vm._s(_vm.default_option))
+      ]),
       _vm._v(" "),
       _vm._l(_vm.options, function(item) {
         return _c("option", { key: item.id, domProps: { value: item.id } }, [
@@ -53351,6 +53340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -53361,7 +53352,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             posts: [],
-            selected: '0',
+            selected: '',
             title: 'Select an option'
         };
     },
@@ -53381,6 +53372,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://jsonplaceholder.typicode.com/users').then(function (response) {
+                _this2.selected = '';
                 _this2.posts = response.data.map(function (item) {
                     return { id: item.id, text: item.id + ' - ' + item.name };
                 });
@@ -53408,7 +53400,11 @@ var render = function() {
       _c(
         "select2",
         {
-          attrs: { default_option: _vm.title, options: _vm.posts },
+          attrs: {
+            default_option: _vm.title,
+            extra_classes: "form-control",
+            options: _vm.posts
+          },
           on: { input: _vm.changeValue }
         },
         [

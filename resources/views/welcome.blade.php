@@ -11,13 +11,13 @@
 
         <!-- Styles -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content" id="app">
-                select2
-                <div class="title m-b-md">
+        <div class="container" id="app">
+            <div class="row">
+                <div class="col-md-6 col-offset-md-3">
                     <posts></posts>
                 </div>
             </div>
